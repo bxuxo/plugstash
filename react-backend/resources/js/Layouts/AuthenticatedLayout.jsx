@@ -6,6 +6,8 @@ import ResponsiveNavLink from '@/Components/ResponsiveNavLink';
 import { Link } from '@inertiajs/react';
 
 export default function Authenticated({ user, header, children }) {
+ 
+  
     const [showingNavigationDropdown, setShowingNavigationDropdown] = useState(false);
 
     return (
@@ -21,9 +23,32 @@ export default function Authenticated({ user, header, children }) {
                             </div>
 
                             <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                                <NavLink href={route('dashboard')} active={route().current('dashboard')}>
-                                    Dashboard
-                                </NavLink>
+
+                                {user ? (
+                                    <>
+                                        {user.role_id === 1 ? (
+                                            <>
+                                                <NavLink href={route('users')} active={route().current('users')}>
+                                                    Users
+                                                </NavLink>
+                                                <NavLink href={route('dashboard')} active={route().current('dashboard')}>
+                                                    Dashboard
+                                                </NavLink>
+                                            </>
+                                        ) : (
+                                            <Link
+                                                href={route('dashboard')} // Link for other roles or default dashboard
+                                                className="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
+                                            >
+                                                Dashboard
+                                            </Link>
+                                        )}
+                                    </>
+                                ) : (
+                                    <>
+
+                                    </>
+                                )}
                             </div>
                         </div>
 
