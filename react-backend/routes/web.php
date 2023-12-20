@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Gate;
 use App\Models\User;
 use Inertia\Inertia;
 
@@ -32,13 +33,16 @@ Route::get('/dashboard', function () {
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/users', function () {
-        $users = User::all(); 
-        return Inertia::render('Users', [
-            'users' => $users,
-        ]);
+        if (Gate::allows('view-users')) {
+            $users = User::all();
+            return Inertia::render('Users', [
+                'users' => $users,
+            ]);
+        } else {
+            return redirect()->route('dashboard');
+        }
     })->name('users');
 });
-
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

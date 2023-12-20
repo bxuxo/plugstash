@@ -36,12 +36,9 @@ export default function Authenticated({ user, header, children }) {
                                                 </NavLink>
                                             </>
                                         ) : (
-                                            <Link
-                                                href={route('dashboard')} // Link for other roles or default dashboard
-                                                className="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
-                                            >
-                                                Dashboard
-                                            </Link>
+                                            <NavLink href={route('dashboard')} active={route().current('dashboard')}>
+                                                    Dashboard
+                                                </NavLink>
                                         )}
                                     </>
                                 ) : (
