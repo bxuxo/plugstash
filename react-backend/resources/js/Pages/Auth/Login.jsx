@@ -1,10 +1,4 @@
 import { useEffect } from 'react';
-import Checkbox from '@/Components/Checkbox';
-import GuestLayout from '@/Layouts/GuestLayout';
-import InputError from '@/Components/InputError';
-import InputLabel from '@/Components/InputLabel';
-import PrimaryButton from '@/Components/PrimaryButton';
-import TextInput from '@/Components/TextInput';
 import { Head, Link, useForm } from '@inertiajs/react';
 
 export default function Login({ status, canResetPassword }) {
@@ -27,46 +21,41 @@ export default function Login({ status, canResetPassword }) {
     };
 
     return (
-        <GuestLayout>
-            <Head title="Log in" />
-
+        <>
             {status && <div className="mb-4 font-medium text-sm text-green-600">{status}</div>}
 
             <form onSubmit={submit}>
                 <div>
-                    <InputLabel htmlFor="email" value="Email" />
+                    <label htmlFor='email' value='email' />
 
-                    <TextInput
-                        id="email"
-                        type="email"
-                        name="email"
-                        value={data.email}
-                        className="mt-1 block w-full"
-                        autoComplete="username"
-                        isFocused={true}
-                        onChange={(e) => setData('email', e.target.value)}
+                    <input
+                        id='email'
+                        type='email'
+                        name='email'
+                        value={ data.email }
+                        autoComplete='username'
+                        onChange={ e => setData( 'email', e.target.value ) }
                     />
 
-                    <InputError message={errors.email} className="mt-2" />
+                    <div>{ errors.email } </div>
                 </div>
 
                 <div className="mt-4">
-                    <InputLabel htmlFor="password" value="Password" />
+                    <label htmlFor='password' value='password' />
 
-                    <TextInput
-                        id="password"
-                        type="password"
-                        name="password"
-                        value={data.password}
-                        className="mt-1 block w-full"
-                        autoComplete="current-password"
-                        onChange={(e) => setData('password', e.target.value)}
+                    <input 
+                        id='password'
+                        type='password'
+                        name='password'
+                        value={ data.password }
+                        autoComplete='current-password'
+                        onChange={ e => setData( 'password', e.target.value ) }
                     />
 
-                    <InputError message={errors.password} className="mt-2" />
+                    <div>{ errors.password }</div>
                 </div>
 
-                <div className="block mt-4">
+                {/* <div className="block mt-4">
                     <label className="flex items-center">
                         <Checkbox
                             name="remember"
@@ -75,9 +64,9 @@ export default function Login({ status, canResetPassword }) {
                         />
                         <span className="ms-2 text-sm text-gray-600 dark:text-gray-400">Remember me</span>
                     </label>
-                </div>
+                </div> */}
 
-                <div className="flex items-center justify-end mt-4">
+                {/* <div className="flex items-center justify-end mt-4">
                     {canResetPassword && (
                         <Link
                             href={route('password.request')}
@@ -90,8 +79,9 @@ export default function Login({ status, canResetPassword }) {
                     <PrimaryButton className="ms-4" disabled={processing}>
                         Log in
                     </PrimaryButton>
-                </div>
+                </div> */}
+                <button disabled={ processing }>log in</button>
             </form>
-        </GuestLayout>
+        </>
     );
 }
