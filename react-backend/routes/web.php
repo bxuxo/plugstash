@@ -42,6 +42,13 @@ Route::middleware(['auth'])->group(function () {
             return redirect()->route('dashboard');
         }
     })->name('users');
+    Route::get('/createUser', function () {
+        if (Gate::allows('view-users')) {
+            return Inertia::render('CreateUser');
+        } else {
+            return redirect()->route('dashboard');
+        }
+    })->name('createUser');
 });
 
 Route::middleware('auth')->group(function () {
